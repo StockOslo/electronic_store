@@ -1,0 +1,79 @@
+# Xcode
+#
+build/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+
+# User-specific Xcode settings
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# Swift Package Manager
+#
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# CocoaPods
+#
+Pods/
+Podfile.lock
+
+# Carthage
+#
+Carthage/Build/
+
+# Accio dependency management
+Dependencies/
+.accio/
+
+# Fastlane
+#
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Code coverage
+#
+*.xccoverage
+*.gcda
+*.gcno
+*.gcov
+
+# Archives
+*.xcarchive
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# SwiftPM Xcode project integration
+.xcodeproj/project.xcworkspace/
+.xcodeproj/xcuserdata/
+
+# iOS device support
+iOS DeviceSupport/
+
+# Other
+.DS_Store
+*.swp
+*.lock
+*.tmp
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.hmap
+
+# Editor-specific
+.idea/
+.vscode/
+*.orig
+
+# Firebase / GoogleService files (optional)
+# Uncomment if you use private keys stored locally
+# GoogleService-Info.plist
