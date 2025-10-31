@@ -1,13 +1,12 @@
 //
-//  ContentView.swift
+//  SettingsScreen.swift
 //  Electronics store
 //
-//  Created by Erik Antonov on 28.10.2025.
+//  Created by Erik Antonov on 30.10.2025.
 //
-
 import SwiftUI
 
-struct ContentView: View {
+struct AccountScreen: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -17,8 +16,4 @@ struct ContentView: View {
         }
         .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
