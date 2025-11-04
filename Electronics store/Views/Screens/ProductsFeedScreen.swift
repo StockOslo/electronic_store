@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProductsScreen: View {
+struct ProductsFeedScreen: View {
     var body: some View {
         LazyVStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ProductsScreen: View {
 }
 
 #Preview {
-    ProductsScreen()
+    ProductsFeedScreen()
 }
