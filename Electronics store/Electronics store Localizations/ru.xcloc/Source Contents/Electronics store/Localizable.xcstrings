@@ -1,0 +1,157 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%lld" : {
+
+    },
+    "158 000 ₽" : {
+
+    },
+    "accessories" : {
+
+    },
+    "accountLabel" : {
+
+    },
+    "adressLabel" : {
+
+    },
+    "allPurchaseBtnLabel" : {
+
+    },
+    "bagBtnLabel" : {
+
+    },
+    "bagLabel" : {
+
+    },
+    "buyBtnLabel" : {
+
+    },
+    "categoryLabel" : {
+
+    },
+    "categoryNameLabel" : {
+
+    },
+    "consoles" : {
+
+    },
+    "emailLabel" : {
+
+    },
+    "favoriteLabel" : {
+
+    },
+    "filtersTitleLabel" : {
+
+    },
+    "goToBuyLabel" : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "laptops" : {
+
+    },
+    "loginBtnLabel" : {
+
+    },
+    "logOutBtnLabel" : {
+
+    },
+    "mainCharacteristicsTitleLabel" : {
+
+    },
+    "moreReviewsLabel" : {
+
+    },
+    "myPurchaseLabel" : {
+
+    },
+    "nameLabel" : {
+
+    },
+    "paymentmethodLabel" : {
+
+    },
+    "promoLabel" : {
+
+    },
+    "pswd1Label" : {
+
+    },
+    "pswd2Label" : {
+
+    },
+    "pswdLabel" : {
+
+    },
+    "ratingFilterLabel" : {
+
+    },
+    "ratingLabel" : {
+
+    },
+    "Register" : {
+
+    },
+    "registrationLabel" : {
+
+    },
+    "reviewsTitleLabel" : {
+
+    },
+    "showLessButtonLabel" : {
+
+    },
+    "showMoreButtonLabel" : {
+
+    },
+    "smartphones" : {
+
+    },
+    "sortFilterLabel" : {
+
+    },
+    "tablets" : {
+
+    },
+    "TotalpriceLabel" : {
+
+    },
+    "tvs" : {
+
+    },
+    "usernameLabel" : {
+
+    },
+    "usrenameLabel" : {
+
+    },
+    "Введите адрес доставки" : {
+
+    },
+    "Введите промокод" : {
+
+    },
+    "Заказ №%@ • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Заказ №%1$@ • %2$@"
+          }
+        }
+      }
+    },
+    "Метод оплаты" : {
+
+    }
+  },
+  "version" : "1.1"
+}

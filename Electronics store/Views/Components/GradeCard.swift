@@ -20,7 +20,7 @@ struct GradeCard: View {
             VStack(alignment: .leading, spacing: 18) {
                 
                 HStack {
-                    Text("Рейтинг товара:")
+                    Text("ratingLabel")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.gray)
                     
@@ -57,7 +57,7 @@ struct GradeCard: View {
                             }
                             .frame(width: 60, alignment: .leading)
                             
-                            // Серый бар — количество отзывов
+
                             GeometryReader { geo in
                                 let widthRatio = CGFloat(reviewCounts[5 - stars]) / CGFloat(maxCount)
                                 

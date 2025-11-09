@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct FavoritesScreen: View {
+    private let columns = [
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            
+            
+            Image(systemName: "heart.fill")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("favoriteLabel")
+                .font(.largeTitle)
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ProductCard()
+                    ProductCard()
+                    ProductCard()
+                    ProductCard()
+                }
+                .padding(20)
+            }
+            .background(Color(UIColor.systemBackground))
+        }.padding(.vertical, 20)
     }
 }
 

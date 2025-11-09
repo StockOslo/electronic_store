@@ -1,21 +1,22 @@
-//
-//  ContentView.swift
-//  Electronics store
-//
-//  Created by Erik Antonov on 28.10.2025.
-//
-
 import SwiftUI
 
 struct ProductsFeedScreen: View {
+    private let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        LazyVStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 10) {
+                ProductCard()
+                ProductCard()
+                ProductCard()
+                ProductCard()
+            }
+            .padding(10)
         }
-        .padding()
+        .background(Color(UIColor.systemBackground))
     }
 }
 

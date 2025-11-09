@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Electronics store/Electronics store-InfoPlist.xcstrings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="26.1" build-num="17B55"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Electronics store</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Electronics store/Localizable.xcstrings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="26.1" build-num="17B55"/>
+    </header>
+    <body>
+      <trans-unit id="" xml:space="preserve">
+        <source/>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld" xml:space="preserve">
+        <source>%lld</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="158 000 ₽" xml:space="preserve">
+        <source>158 000 ₽</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Key" xml:space="preserve">
+        <source>Key</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Register" xml:space="preserve">
+        <source>Register</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="TotalpriceLabel" xml:space="preserve">
+        <source>TotalpriceLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="accessories" xml:space="preserve">
+        <source>accessories</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="accountLabel" xml:space="preserve">
+        <source>accountLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="adressLabel" xml:space="preserve">
+        <source>adressLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="allPurchaseBtnLabel" xml:space="preserve">
+        <source>allPurchaseBtnLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="bagBtnLabel" xml:space="preserve">
+        <source>bagBtnLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="bagLabel" xml:space="preserve">
+        <source>bagLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="buyBtnLabel" xml:space="preserve">
+        <source>buyBtnLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="categoryLabel" xml:space="preserve">
+        <source>categoryLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="categoryNameLabel" xml:space="preserve">
+        <source>categoryNameLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="consoles" xml:space="preserve">
+        <source>consoles</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="emailLabel" xml:space="preserve">
+        <source>emailLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="favoriteLabel" xml:space="preserve">
+        <source>favoriteLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="filtersTitleLabel" xml:space="preserve">
+        <source>filtersTitleLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="goToBuyLabel" xml:space="preserve">
+        <source>goToBuyLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="laptops" xml:space="preserve">
+        <source>laptops</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="logOutBtnLabel" xml:space="preserve">
+        <source>logOutBtnLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="loginBtnLabel" xml:space="preserve">
+        <source>loginBtnLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="mainCharacteristicsTitleLabel" xml:space="preserve">
+        <source>mainCharacteristicsTitleLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="moreReviewsLabel" xml:space="preserve">
+        <source>moreReviewsLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="myPurchaseLabel" xml:space="preserve">
+        <source>myPurchaseLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="nameLabel" xml:space="preserve">
+        <source>nameLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="paymentmethodLabel" xml:space="preserve">
+        <source>paymentmethodLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="promoLabel" xml:space="preserve">
+        <source>promoLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="pswd1Label" xml:space="preserve">
+        <source>pswd1Label</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="pswd2Label" xml:space="preserve">
+        <source>pswd2Label</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="pswdLabel" xml:space="preserve">
+        <source>pswdLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="ratingFilterLabel" xml:space="preserve">
+        <source>ratingFilterLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="ratingLabel" xml:space="preserve">
+        <source>ratingLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="registrationLabel" xml:space="preserve">
+        <source>registrationLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="reviewsTitleLabel" xml:space="preserve">
+        <source>reviewsTitleLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="showLessButtonLabel" xml:space="preserve">
+        <source>showLessButtonLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="showMoreButtonLabel" xml:space="preserve">
+        <source>showMoreButtonLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="smartphones" xml:space="preserve">
+        <source>smartphones</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="sortFilterLabel" xml:space="preserve">
+        <source>sortFilterLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tablets" xml:space="preserve">
+        <source>tablets</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tvs" xml:space="preserve">
+        <source>tvs</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="usernameLabel" xml:space="preserve">
+        <source>usernameLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="usrenameLabel" xml:space="preserve">
+        <source>usrenameLabel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Введите адрес доставки" xml:space="preserve">
+        <source>Введите адрес доставки</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Введите промокод" xml:space="preserve">
+        <source>Введите промокод</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Заказ №%@ • %@" xml:space="preserve">
+        <source>Заказ №%1$@ • %2$@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Метод оплаты" xml:space="preserve">
+        <source>Метод оплаты</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

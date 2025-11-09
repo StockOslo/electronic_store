@@ -11,7 +11,40 @@ import SwiftUI
 struct Electronics_storeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ProductsFeedScreen()
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("")
+                    }
+                
+
+                CategoriesScreen()
+                    .tabItem {
+                        Image(systemName: "tag")
+                        Text("")
+                    }
+
+                FavoritesScreen()
+                    .tabItem {
+                        Image(systemName: "heart")
+                        Text("")
+                    }
+
+                ShoppingBagScreen()
+                    .tabItem {
+                        Image(systemName: "cart")
+                        Text("")
+                    }
+
+               AccountScreen()
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("")
+                    }
+            }
+            .preferredColorScheme(.light)
         }
+        
     }
 }
