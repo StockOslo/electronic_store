@@ -1,3 +1,4 @@
+
 # Xcode
 #
 build/
@@ -77,3 +78,80 @@ iOS DeviceSupport/
 # Firebase / GoogleService files (optional)
 # Uncomment if you use private keys stored locally
 # GoogleService-Info.plist
+# =========================
+# Common / OS
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.log
+
+# =========================
+# Xcode / Swift / SwiftUI
+# =========================
+xcuserdata/
+*.xcuserstate
+
+DerivedData/
+build/
+
+*.moved-aside
+*.xcscmblueprint
+
+.build/
+Packages/
+Package.pins
+
+Pods/
+Carthage/Build/
+
+.idea/
+.vscode/
+
+# =========================
+# Python / FastAPI
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+venv/
+env/
+ENV/
+
+.env
+.env.*
+*.env
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+coverage.xml
+htmlcov/
+
+dist/
+build/
+*.egg-info/
+.eggs/
+
+.ipynb_checkpoints/
+
+# =========================
+# Database / local data
+# =========================
+*.sqlite3
+*.db
+
+# =========================
+# Misc
+# =========================
+*.tmp
+*.swp
