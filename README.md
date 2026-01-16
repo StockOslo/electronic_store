@@ -193,8 +193,7 @@ The repository will be expanded with additional documentation:
 ## Author
 
 **Erik Antonov**  
-Junior iOS Developer  
 
-GitHub: https://github.com/your-github-username
+GitHub: https://github.com/StockOslo
 
 This project was developed as part of an academic coursework with a focus on real-world mobile application development practices and clean architecture principles.
