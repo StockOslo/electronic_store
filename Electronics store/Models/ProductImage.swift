@@ -1,3 +1,11 @@
+//
+//  ProductImage.swift
+//  Electronics store
+//
+//  Created by Erik Antonov on 11.01.2026.
+//
+
+
 import Foundation
 
 struct ProductImage: Decodable, Identifiable {

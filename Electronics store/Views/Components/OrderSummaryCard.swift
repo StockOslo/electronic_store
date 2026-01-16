@@ -1,28 +1,21 @@
-//
-//  OrderSummaryCard.swift
-//  Electronics store
-//
-//  Created by Erik Antonov on 02.11.2025.
-//
 import SwiftUI
 
 struct OrderSummaryCard: View {
     let paymentMethods = ["SberBank", "SBP", "T-Bank"]
-    
-    @State var promoCode: String = " "
-    @State var address: String = " "
-    
-    @State private var selectedPayMethod = "T-Bank"
-    
+
+    @Binding var promoCode: String
+    @Binding var address: String
+    @Binding var selectedPayMethod: String
+
     var body: some View {
         HStack(spacing: 18) {
             VStack(spacing: 18) {
-                
+
                 VStack(alignment: .leading, spacing: 6) {
                     Text("promoLabel")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.gray)
-                    
+
                     TextField("", text: $promoCode)
                         .padding(14)
                         .background(
@@ -40,12 +33,12 @@ struct OrderSummaryCard: View {
                         .textInputAutocapitalization(.none)
                         .autocorrectionDisabled()
                 }
-                
+
                 VStack(alignment: .leading, spacing: 6) {
                     Text("adressLabel")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.gray)
-                    
+
                     TextField("", text: $address)
                         .padding(14)
                         .background(
@@ -63,18 +56,18 @@ struct OrderSummaryCard: View {
                         .textInputAutocapitalization(.none)
                         .autocorrectionDisabled()
                 }
-                
+
                 VStack(alignment: .leading, spacing: 6) {
                     Text("paymentmethodLabel")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.gray)
-                    
+
                     HStack {
                         Picker("", selection: $selectedPayMethod) {
+                            Text("Выбрать").tag("")
+
                             ForEach(paymentMethods, id: \.self) { method in
-                                Text(method)
-                                    .tag(method)
-                                    .foregroundColor(.gray)
+                                Text(method).tag(method)
                             }
                         }
                         .pickerStyle(.menu)
@@ -92,34 +85,7 @@ struct OrderSummaryCard: View {
                             .stroke(Color.gray.opacity(0.4), lineWidth: 1)
                     )
                 }
-                
-                Divider()
-                    .padding(.vertical, 6)
-                
-                HStack {
-                    Text("TotalpriceLabel")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.gray)
-                    
-                    Spacer()
-                    
-                    Text("158 000 ₽")
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(.black.opacity(0.8))
-                        .shadow(color: .gray.opacity(0.3), radius: 1, x: 0, y: 1)
-                }
-                .padding(.horizontal, 4)
             }
-            .padding(20)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.white)
-                    .shadow(color: .gray.opacity(0.25), radius: 8, x: 0, y: 4)
-            )
         }
     }
-}
-
-#Preview {
-    OrderSummaryCard()
 }

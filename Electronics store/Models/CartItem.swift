@@ -1,6 +1,14 @@
+//
+//  CartItem.swift
+//  Electronics store
+//
+//  Created by Erik Antonov on 09.01.2026.
+//
+
+
 import Foundation
 
-struct CartItem: Decodable, Identifiable {
+struct CartItem: Decodable, Identifiable, Equatable {
     let id: String
     let productId: String
     let quantity: Int

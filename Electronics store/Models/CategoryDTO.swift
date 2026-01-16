@@ -1,3 +1,11 @@
+//
+//  CategoryDTO.swift
+//  Electronics store
+//
+//  Created by Erik Antonov on 10.01.2026.
+//
+
+
 import Foundation
 
 struct CategoryDTO: Identifiable, Decodable {

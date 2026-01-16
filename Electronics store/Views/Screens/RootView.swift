@@ -1,18 +1,38 @@
-//
-//  RootView.swift
-//  Electronics store
-//
-//  Created by Erik Antonov on 30.12.2025.
-//
-
 import SwiftUI
 
 struct RootView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @AppStorage("access_token") private var accessToken: String?
 
-#Preview {
-    RootView()
+    @StateObject private var authManager = AuthManager()
+    @StateObject private var userManager = UserManager()
+
+    private var isAuthorized: Bool {
+        guard let t = accessToken else { return false }
+        return !t.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if isAuthorized {
+                    AccountScreen()
+                } else {
+                    LoginScreen()
+                }
+            }
+        }
+        .environmentObject(authManager)
+        .environmentObject(userManager)
+
+        .task {
+            userManager.getMe()
+        }
+        .onChange(of: accessToken) { _ in
+            userManager.getMe()
+
+            if !isAuthorized {
+                userManager.clearProfile()
+            }
+        }
+    }
 }

@@ -1,90 +1,100 @@
 import SwiftUI
 
 struct ProductCard: View {
-    // изображения (пока одинаковые, но можно подставить из API)
-    let productImages = ["laptopcomputer", "laptopcomputer", "laptopcomputer"]
-    
-    var productName: String = "MacBook Pro M4"
-    var productPrice: String = "145 000 руб."
-    var productRating: Double = 4.5
 
+    let product: Product
+    let imageURLs: [String]
+
+    @EnvironmentObject var favoritesManager: FavoritesManager
     @State private var selectedImageIndex = 0
-    @State private var isFavorite = false
-    
+
+    private var fallbackSymbols: [String] { ["laptopcomputer", "laptopcomputer", "laptopcomputer"] }
+    private var hasRemote: Bool { !imageURLs.isEmpty }
+    private var displayImages: [String] { hasRemote ? imageURLs : fallbackSymbols }
+
+    private var ratingValue: Double { Double(product.rating) ?? 0.0 }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Галерея изображений
+
             TabView(selection: $selectedImageIndex) {
-                ForEach(productImages.indices, id: \.self) { index in
-                    Image(systemName: productImages[index])
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                        .foregroundStyle(.blue)
+                ForEach(displayImages.indices, id: \.self) { index in
+                    if hasRemote {
+                        AsyncImage(url: URL(string: displayImages[index])) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding()
+                            default:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding()
+                                    .foregroundStyle(.gray)
+                            }
+                        }
                         .tag(index)
+                    } else {
+                        Image(systemName: displayImages[index])
+                            .resizable()
+                            .scaledToFit()
+                            .padding()
+                            .foregroundStyle(.blue)
+                            .tag(index)
+                    }
                 }
             }
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
             .frame(height: 140)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.white)
-                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
-            )
-            
-            // Название + сердечко
+            .tabViewStyle(.page)
+
             HStack(alignment: .top) {
-                Text(productName)
+                Text(product.name)
                     .font(.headline)
                     .lineLimit(2)
-                    .foregroundStyle(.primary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
+
+                Spacer()
+
                 Button {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                        isFavorite.toggle()
-                    }
+                    guard favoritesManager.isAuthorized else { return }
+                    Task { await favoritesManager.toggleFavorite(productId: product.id) }
                 } label: {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .font(.system(size: 18))
-                        .foregroundColor(isFavorite ? .red : .gray)
-                        .padding(6)
-                        .background(Color.white.opacity(0.9))
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+                    Image(systemName: favoritesManager.isFavorite(product.id) ? "heart.fill" : "heart")
+                        .foregroundColor(favoritesManager.isFavorite(product.id) ? .red : .gray)
                 }
+                .buttonStyle(.plain)
             }
-            
-            // Рейтинг
+
             HStack(spacing: 2) {
-                ForEach(0..<5) { index in
-                    Image(systemName: index < Int(productRating) ? "star.fill" : "star")
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                ForEach(0..<5, id: \.self) { i in
+                    Image(systemName: i < Int(ratingValue) ? "star.fill" : "star")
+                        .font(.caption)
                         .foregroundColor(.yellow)
                 }
-                Text(String(format: "%.1f", productRating))
+
+                Text(String(format: "%.1f", ratingValue))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.gray)
             }
-            
-            // Цена
-            Text(productPrice)
-                .font(.title3)
-                .bold()
+
+            Text("\(product.price) ₽")
+                .font(.title3.bold())
                 .foregroundStyle(.blue)
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white)
-                .shadow(color: .gray.opacity(0.2), radius: 8, x: 0, y: 4)
+                .shadow(radius: 6)
         )
+        .onAppear {
+            if hasRemote {
+                ImagePrefetcher.shared.prefetch(imageURLs)
+            }
+        }
     }
-}
-
-#Preview {
-    ProductCard()
-        .frame(width: 200)
 }

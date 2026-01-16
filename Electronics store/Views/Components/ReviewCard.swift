@@ -1,67 +1,60 @@
-//
-//  ReviewCard.swift
-//  Electronics store
-//
-//  Created by Erik Antonov on 03.11.2025.
-//
-
 import SwiftUI
 
 struct ReviewCard: View {
-    var username: String = "Иван Петров"
-       var date: String = "2 ноября 2025"
-       var rating: Int = 4
-       var reviewText: String = "Отличный ноутбук! Работает быстро, батареи хватает почти на целый день. Качество сборки на высоте, рекомендую."
+
+    let review: Review
+    @EnvironmentObject private var userManager: UserManager
+
+    private var displayName: String {
+        if let uid = review.userId, !uid.isEmpty, uid == userManager.userId {
+            return "Вы"
+        }
+        return "Пользователь"
+    }
+
+    private var dateText: String {
+        review.createdAt ?? ""
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-                   
-                   // 🔹 Верхняя часть — аватарка и имя
-                   HStack(alignment: .center, spacing: 12) {
-                       Image(systemName: "laptop")
-                           .resizable()
-                           .scaledToFit()
-                           .frame(width: 42, height: 42)
-                           .padding(8)
-                           .background(Color.gray.opacity(0.1))
-                           .clipShape(Circle())
-                       
-                       VStack(alignment: .leading, spacing: 2) {
-                           Text(username)
-                               .font(.system(size: 16, weight: .semibold))
-                               .foregroundColor(.primary)
-                           Text(date)
-                               .font(.system(size: 13))
-                               .foregroundColor(.gray)
-                       }
-                       Spacer()
-                   }
-                   
-                   // ⭐️ Рейтинг
-                   HStack(spacing: 3) {
-                       ForEach(0..<5) { index in
-                           Image(systemName: index < rating ? "star.fill" : "star")
-                               .resizable()
-                               .frame(width: 13, height: 13)
-                               .foregroundColor(.yellow)
-                       }
-                   }
-                   
-                   // 💬 Текст отзыва
-                   Text(reviewText)
-                       .font(.system(size: 15))
-                       .foregroundColor(.gray)
-                       .lineSpacing(4)
-                   
-               }
-               .padding(18)
-               .background(
-                   RoundedRectangle(cornerRadius: 16)
-                       .fill(Color.white)
-                       .shadow(color: .gray.opacity(0.2), radius: 6, x: 0, y: 3)
-               )
-           }
-       }
 
-#Preview {
-    ReviewCard()
+            HStack(spacing: 12) {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .frame(width: 42, height: 42)
+                    .foregroundColor(.gray)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(displayName)
+                        .font(.system(size: 16, weight: .semibold))
+
+                    Text(dateText)
+                        .font(.system(size: 13))
+                        .foregroundColor(.gray)
+                }
+
+                Spacer()
+            }
+
+            HStack(spacing: 3) {
+                let r = review.rating ?? 0
+                ForEach(0..<5, id: \.self) { i in
+                    Image(systemName: i < r ? "star.fill" : "star")
+                        .foregroundColor(.yellow)
+                        .font(.caption)
+                }
+            }
+
+            Text(review.text ?? "")
+                .font(.system(size: 15))
+                .foregroundColor(.secondary)
+        }
+        .padding(18)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white)
+                .shadow(radius: 4)
+        )
+    }
 }

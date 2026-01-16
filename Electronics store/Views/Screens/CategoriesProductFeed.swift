@@ -1,65 +1,80 @@
-//
-//  CategoriesProductFeed.swift
-//  Electronics store
-//
-//  Created by Erik Antonov on 04.11.2025.
-//
-
 import SwiftUI
 
 struct CategoriesProductFeed: View {
 
-    private let columns = [GridItem(.flexible()),
-                           GridItem(.flexible())]
-    
+    let categoryId: String
+    let categoryName: String
+
+    @StateObject private var productManager = ProductManager()
+
+    @State private var filters: [(title: String, options: [String])] = []
+    @State private var isLoadingFilters = false
+
+    private let columns = [GridItem(.flexible()), GridItem(.flexible())]
+
     var body: some View {
         VStack(spacing: 0) {
-            
-            
+
             VStack(spacing: 16) {
-                // Верхняя панель
                 HStack(spacing: 12) {
-                    Button(action: {}) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.gray)
-                            .padding(10)
-                            .background(
-                                Circle()
-                                    .fill(Color.white)
-                                    .shadow(color: .gray.opacity(0.3), radius: 4, x: 0, y: 2)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                    Spacer()
-                    
-                    Text("categoryNameLabel")
-                        .font(.largeTitle)
-                        .bold()
-                    
-                    
+                    Text(LocalizedStringKey(categoryName))
+                        .font(.largeTitle.bold())
                 }
                 .padding(.horizontal, 20)
+
                 ScrollView {
-                    VStack{
-                        CategoryFiltersCard()
+                    VStack {
+
+                        CategoryFiltersCard(
+                            filters: filters,
+                            isLoading: isLoadingFilters,
+                            onSelect: { specName, value in
+                                Task {
+                                    if let v = value, !v.isEmpty {
+                                        await productManager.loadProductsBySpec(
+                                            specName: specName,
+                                            value: v
+                                        )
+                                    } else {
+                                        await productManager.loadProductsByCategory(
+                                            categoryId: categoryId
+                                        )
+                                    }
+                                }
+                            }
+                        )
+
                         LazyVGrid(columns: columns, spacing: 12) {
-                            ForEach(0..<10, id: \.self) { _ in
-                                ProductCard()
+                            ForEach(productManager.products) { product in
+                                NavigationLink {
+                                    ProductScreen(productId: product.id)
+                                } label: {
+                                    let urls = productManager.imagesByProductId[product.id] ?? []
+                                    ProductCard(product: product, imageURLs: urls)
+                                }
+                                .buttonStyle(.plain)
                             }
                         }
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                     }
                 }
-                
             }
             .ignoresSafeArea(edges: .bottom)
-            .background(Color(.systemGroupedBackground))
+            .background(Color.white)
+        }
+        .navigationTitle("")
+        .task {
+            await productManager.loadProductsByCategory(categoryId: categoryId)
+
+            isLoadingFilters = true
+            let dict = await productManager.buildFiltersForCategoryProducts(productManager.products)
+
+            var arr: [(String, [String])] = dict.map { ($0.key, $0.value) }
+            arr.sort { $0.0 < $1.0 }
+
+            filters = arr
+            isLoadingFilters = false
         }
     }
-}
-
-#Preview {
-    CategoriesProductFeed()
 }

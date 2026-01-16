@@ -1,3 +1,11 @@
+//
+//  Order.swift
+//  Electronics store
+//
+//  Created by Erik Antonov on 09.01.2026.
+//
+
+
 import Foundation
 
 struct Order: Identifiable, Decodable {

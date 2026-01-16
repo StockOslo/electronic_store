@@ -1,64 +1,34 @@
 import Foundation
 import SwiftUI
+import Combine
+
+struct FavoriteItem: Decodable {
+    let product_id: String
+}
 
 @MainActor
 final class FavoritesManager: ObservableObject {
 
-    private let baseURL = "http://192.168.100.4:8000"
+    private let baseURL = "http://172.20.10.2:8000"
 
-    // token берём так же, как в UserManager
     @AppStorage("access_token") private var accessToken: String?
 
-    // Храним product_id избранных
-    @Published private(set) var favoriteIds: Set<String> = []
-
-    @Published var isLoading: Bool = false
+    @Published var favoriteIds: Set<String> = []
+    @Published var isLoading = false
     @Published var errorMessage: String?
 
-    var isAuthorized: Bool { accessToken?.isEmpty == false }
+    var isAuthorized: Bool {
+        guard let token = accessToken else { return false }
+        return !token.isEmpty
+    }
 
     func isFavorite(_ productId: String) -> Bool {
         favoriteIds.contains(productId)
     }
 
-    // MARK: - Load all favorites
-    func loadFavorites() async {
-        guard isAuthorized else {
-            favoriteIds = []
-            return
-        }
-
-        guard let url = URL(string: "\(baseURL)/favorites/favorites") else { return }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(accessToken!)", forHTTPHeaderField: "Authorization")
-
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
-
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            let http = response as? HTTPURLResponse
-
-            guard http?.statusCode == 200 else {
-                errorMessage = "Ошибка избранного: \(http?.statusCode ?? -1)"
-                return
-            }
-
-            let items = try JSONDecoder().decode([FavoriteItem].self, from: data)
-            favoriteIds = Set(items.map { $0.product_id })
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-    }
-
-    // MARK: - Toggle favorite
     func toggleFavorite(productId: String) async {
         guard isAuthorized else {
-            errorMessage = "Нужно войти в аккаунт"
+            errorMessage = "authRequired"
             return
         }
 
@@ -69,55 +39,104 @@ final class FavoritesManager: ObservableObject {
         }
     }
 
-    // MARK: - Add
+    func loadFavorites() async {
+        guard isAuthorized else {
+            favoriteIds = []
+            return
+        }
+
+        guard let url = URL(string: "\(baseURL)/favorites/favorites") else {
+            errorMessage = "invalidUrl"
+            favoriteIds = []
+            return
+        }
+
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(accessToken!)", forHTTPHeaderField: "Authorization")
+
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+            guard (200...299).contains(statusCode) else {
+                errorMessage = "favoritesLoadError"
+                return
+            }
+
+            let decoded = try JSONDecoder().decode([FavoriteItem].self, from: data)
+            favoriteIds = Set(decoded.map { $0.product_id })
+
+        } catch {
+            errorMessage = "favoritesLoadFailed"
+            favoriteIds = []
+        }
+    }
+
     private func addFavorite(productId: String) async {
-        guard let url = URL(string: "\(baseURL)/favorites/favorites/\(productId)") else { return }
+        guard let url = URL(string: "\(baseURL)/favorites/favorites/\(productId)") else {
+            errorMessage = "invalidUrl"
+            return
+        }
+
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(accessToken!)", forHTTPHeaderField: "Authorization")
 
-        // optimistic UI
-        favoriteIds.insert(productId)
-
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
-            let http = response as? HTTPURLResponse
-            if http?.statusCode != 201 && http?.statusCode != 200 {
-                // rollback
-                favoriteIds.remove(productId)
-                errorMessage = "Не удалось добавить в избранное"
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+            guard (200...299).contains(statusCode) else {
+                errorMessage = "favoritesAddError"
+                return
             }
+
+            favoriteIds.insert(productId)
+
         } catch {
-            favoriteIds.remove(productId)
-            errorMessage = error.localizedDescription
+            errorMessage = "favoritesAddFailed"
         }
     }
 
-    // MARK: - Remove
     private func removeFavorite(productId: String) async {
-        guard let url = URL(string: "\(baseURL)/favorites/favorites/\(productId)") else { return }
+        guard let url = URL(string: "\(baseURL)/favorites/favorites/\(productId)") else {
+            errorMessage = "invalidUrl"
+            return
+        }
+
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
 
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(accessToken!)", forHTTPHeaderField: "Authorization")
 
-        // optimistic UI
-        favoriteIds.remove(productId)
-
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
-            let http = response as? HTTPURLResponse
-            if http?.statusCode != 200 {
-                // rollback
-                favoriteIds.insert(productId)
-                errorMessage = "Не удалось удалить из избранного"
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+            guard (200...299).contains(statusCode) else {
+                errorMessage = "favoritesRemoveError"
+                return
             }
+
+            favoriteIds.remove(productId)
+
         } catch {
-            favoriteIds.insert(productId)
-            errorMessage = error.localizedDescription
+            errorMessage = "favoritesRemoveFailed"
         }
     }
 }
