@@ -2,21 +2,23 @@
 
 ## Overview
 
-**Electronics Store** is a mobile application for an electronics online store developed for the iOS platform.  
-The project was created as part of an academic course work and is focused on demonstrating modern iOS development approaches, clean architecture, and interaction with a backend service via REST API.
+**Electronics Store** is an iOS mobile application for an electronics online store.  
+The project is an **educational coursework project** developed to demonstrate modern iOS development practices, clean architecture principles, and interaction with a backend service via a REST API.
 
-The application covers the full user flow: browsing products, filtering by categories and specifications, managing a shopping cart, placing orders, working with favorites, and leaving reviews.
+The application implements a complete e-commerce user flow: product browsing, category-based navigation, dynamic filtering by specifications, shopping cart management, order placement, favorites handling, and product reviews.
 
 ---
 
-## Project Goals
+## Project Purpose
 
-The main goals of this project are:
-- implementation of a real-world mobile e-commerce scenario;
-- application of modern iOS technologies and architectural patterns;
-- separation of client and server logic;
-- ensuring scalability and maintainability of the codebase;
-- demonstration of testing and validation of business logic.
+The purpose of this project is to:
+- demonstrate practical skills in iOS application development;
+- apply modern Apple technologies and architectural patterns;
+- separate client-side and server-side logic;
+- implement scalable and maintainable application architecture;
+- showcase unit testing of business logic.
+
+The project is not intended for commercial use and was developed as part of an academic program.
 
 ---
 
@@ -24,59 +26,59 @@ The main goals of this project are:
 
 ### User Account
 - User registration and authentication
-- Secure token-based authorization (Bearer Token)
-- User profile loading and management
+- Token-based authorization (Bearer Token)
+- Secure session handling
 
 ### Product Catalog
-- Product listing
+- Product listing with grid layout
 - Category-based navigation
-- Dynamic filters based on product specifications
-- Product detail screen with image gallery
-- Product specifications and reviews
+- Product detail screen
+- Image gallery for products
+- Product specifications display
 
-### Filtering System
-- Automatic generation of filters for a selected category
-- Display of only relevant specifications
+### Dynamic Filtering System
+- Automatic generation of filters based on selected category
+- Display of relevant product specifications only
 - Filter reset and reapplication
-- Scalable logic for future filter expansion
+- Flexible architecture for future filter expansion
 
 ### Shopping Cart
 - Adding and removing products
 - Quantity management
 - Real-time total price calculation
-- Order creation
+- Order creation from cart
 
 ### Orders
 - Order placement
 - Order history
-- Display of purchased products
+- Display of purchased items
 
 ### Favorites
 - Adding and removing products from favorites
 - Separate favorites screen
-- Synchronization with the backend
+- Backend synchronization
 
 ### Reviews
 - Viewing product reviews
-- Creating, editing, and deleting user reviews
-- Average rating calculation and rating distribution
+- Creating and deleting reviews
+- Rating calculation and distribution
 
 ---
 
 ## Architecture
 
-The application is built using **SwiftUI** and follows the **MVVM (Model–View–ViewModel)** pattern.
+The application is built using **SwiftUI** and follows the **MVVM (Model–View–ViewModel)** architectural pattern.
 
 ### Architectural Principles
-- Views contain only UI logic
-- Business logic is handled by manager classes
+- UI logic is isolated in Views
+- Business logic is handled by manager/view-model classes
 - Models represent pure data structures
-- Network communication is isolated in managers
-- Asynchronous operations use `async/await`
+- Network communication is separated into service layers
+- Asynchronous operations are implemented using `async/await`
 
 ### Core Managers
-- `AuthManager` — authentication and registration
-- `UserManager` — user profile management
+- `AuthManager` — user authentication and registration
+- `UserManager` — user session and profile handling
 - `ProductManager` — products, categories, filters, images
 - `CartManager` — shopping cart logic
 - `OrdersManager` — order creation and history
@@ -89,40 +91,40 @@ The application is built using **SwiftUI** and follows the **MVVM (Model–View�
 The mobile application communicates with a backend server via a REST API.
 
 ### Backend Technologies
-- FastAPI
+- **FastAPI**
 - PostgreSQL
 - REST architecture
-- JSON data format
+- JSON data exchange
 - JWT-based authentication
 
 ### API Status
-The backend API is under active development.  
-A separate API documentation and server-side source code will be added to this repository in future updates.
+The backend API is currently **under active development**.  
+The server-side source code, API documentation, and database schema will be added to this repository in future updates.
 
 ---
 
 ## Image Loading & Caching
 
 - Asynchronous image loading using `AsyncImage`
-- Image prefetching to improve user experience
-- URL-based caching with `URLCache`
-- Support for multiple product images
-- Main image prioritization and ordering
+- Image prefetching to improve perceived performance
+- URL-based caching using `URLCache`
+- Support for multiple product images per item
+- Main image prioritization
 
 ---
 
 ## Testing
 
-The project includes **unit testing** focused on business logic validation.
+The project includes **unit testing** focused on validating business logic independently of the user interface.
 
-### Covered Areas
-- Authorization state handling
-- Cart logic and quantity calculation
-- Favorites logic
-- Error handling and API state validation
+### Tested Components
+- Authorization state logic
+- Shopping cart quantity handling
+- Favorites management
+- Error handling and state validation
 
 Unit tests are implemented using the built-in Xcode testing framework and are executed automatically within the development environment.  
-Test execution results and successful test runs are documented in the project report (Figures 1–2).
+Successful test execution results are presented in the project report (Figures 1–2).
 
 ---
 
@@ -142,10 +144,11 @@ Test execution results and successful test runs are documented in the project re
 - REST API
 - JWT authentication
 
-### Tools
+### Development Tools
 - Xcode
 - Git
-- iOS Simulator and real devices
+- iOS Simulator
+- Physical iOS devices
 
 ---
 
@@ -154,7 +157,7 @@ Test execution results and successful test runs are documented in the project re
 ### Client
 - iOS 16.0 or later
 - iPhone device
-- Internet connection
+- Stable internet connection
 
 ### Server
 - Operating System: Linux / macOS / Windows
@@ -168,7 +171,7 @@ Test execution results and successful test runs are documented in the project re
 ## Future Improvements
 
 - Combined multi-parameter filtering
-- Product list pagination
+- Product pagination
 - Push notifications
 - Online payment integration
 - Localization
@@ -179,8 +182,8 @@ Test execution results and successful test runs are documented in the project re
 
 ## Documentation
 
-Additional documentation will be added to this repository, including:
-- API reference
+The repository will be expanded with additional documentation:
+- REST API reference
 - Database schema description
 - Architecture diagrams
 - Setup and deployment instructions
@@ -189,7 +192,9 @@ Additional documentation will be added to this repository, including:
 
 ## Author
 
-Erik Antonov  
-iOS Developer (Junior)
+**Erik Antonov**  
+Junior iOS Developer  
 
-The project was developed as part of an academic coursework with a focus on real-world mobile application development practices.
+GitHub: https://github.com/your-github-username
+
+This project was developed as part of an academic coursework with a focus on real-world mobile application development practices and clean architecture principles.
